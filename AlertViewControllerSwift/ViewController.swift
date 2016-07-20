@@ -37,6 +37,21 @@ class ViewController: UIViewController {
     }
 
     func ckPop() {
+        let alertController = UIAlertController(title: "保存或删除数据", message: "删除数据将不可恢复", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: nil)
+        
+        for tmp in 0...16 {
+            let archiveAction = UIAlertAction(title: "保存 \(tmp)", style: UIAlertActionStyle.Default, handler: nil)
+            alertController.addAction(archiveAction)
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+
+        
         
     }
 
