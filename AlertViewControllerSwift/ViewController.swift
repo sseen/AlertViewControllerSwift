@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         self.view.addSubview(bt)
         // vlf
         let viewDic = ["v1":bt]
-        let hConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[v1(==80)]", options: .AlignAllCenterX, metrics: nil, views: viewDic)
+        let hConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[v1(>=80)]", options: .AlignAllCenterX, metrics: nil, views: viewDic)
         let vConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[v1(==40)]", options: .AlignAllCenterY, metrics: nil, views: viewDic)
         self.view.addConstraints(hConstraint)
         self.view.addConstraints(vConstraint)
@@ -40,6 +40,18 @@ class ViewController: UIViewController {
         btAlert.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(btAlert)
         
+        // view dictionry
+        let alertDic = ["v1":btAlert]
+        // size h constraint on button
+        let hAlertConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[v1(>=80)]", options: .AlignAllCenterX, metrics: nil, views: alertDic)
+        // v constraint on button
+        let vAlertConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[v1(==40)]", options: .AlignAllCenterY, metrics: nil, views: alertDic)
+        // add constraints to super view
+        self.view.addConstraints(hAlertConstraint)
+        self.view.addConstraints(vAlertConstraint)
+        // origin point
+        self.view.addConstraint(NSLayoutConstraint(item: btAlert, attribute: .Left, relatedBy: .Equal, toItem: bt, attribute: .Left, multiplier: 1, constant: 0.0))
+        self.view.addConstraint(NSLayoutConstraint(item: btAlert, attribute: .Top, relatedBy: .Equal, toItem: bt, attribute: .Bottom, multiplier: 1, constant: 20))
         
     }
 
@@ -66,7 +78,18 @@ class ViewController: UIViewController {
     }
     
     func ckAlert() {
-        
+        let alertController = UIAlertController(title: "警告", message: "⚠️ 小心操作 ❌", preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .Cancel) { (action) in
+            print("cancel")
+        }
+        let confrimAction = UIAlertAction(title: "✅", style: .Default) { (action) in
+            print("ok")
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(confrimAction)
+        self.presentViewController(alertController, animated: true) { 
+            print("doner")
+        }
     }
 
 }
